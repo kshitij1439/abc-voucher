@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
+
+/* ======================================
+   Anti-AI Design System
+   Clean, muted, professional palette
+   ====================================== */
+
+@theme {
+  /* --- Warm Neutral Palette --- */
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f0;
+  --color-stone-200: #e8e6df;
+  --color-stone-300: #d6d3c8;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-600: #57534e;
+  --color-stone-700: #44403c;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+
+  /* --- Accent: Deep Teal --- */
+  --color-teal-600: #0f766e;
+  --color-teal-700: #0d6560;
+  --color-teal-500: #14b8a6;
+
+  /* --- Status Colors (muted, not neon) --- */
+  --color-status-draft: #78716c;
+  --color-status-submitted: #b45309;
+  --color-status-approved: #15803d;
+  --color-status-rejected: #b91c1c;
+
+  --color-draft-bg: #f5f5f0;
+  --color-submitted-bg: #fef3c7;
+  --color-approved-bg: #dcfce7;
+  --color-rejected-bg: #fee2e2;
+
+  /* --- Typography --- */
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Source Serif 4", Georgia, serif;
+}
+
+
+/* ======================================
+   Base Styles
+   ====================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-stone-100);
+  color: var(--color-stone-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-stone-900);
+}
+
+/* ======================================
+   Scrollbar (subtle)
+   ====================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-stone-400);
+}
+
+/* ======================================
+   Form Inputs — clean and flat
+   ====================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+/* ======================================
+   Transitions
+   ====================================== */
+
+a, button {
+  transition: all 0.15s ease;
+}
+
+/* Print styles for voucher detail */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+  }
+}
