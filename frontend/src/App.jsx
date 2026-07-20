@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 // Employee pages
 import EmployeeDashboard from './pages/employee/Dashboard';
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           {/* Public */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Employee Routes */}
           <Route element={<ProtectedRoute allowedRoles={['employee']}><Layout /></ProtectedRoute>}>

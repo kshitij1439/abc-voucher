@@ -155,12 +155,16 @@ cd backend
 npm run seed
 ```
 
-This creates three demo users:
-| Role      | Email              | Password    |
-|-----------|-------------------|-------------|
-| Employee  | employee@abc.com  | password123 |
-| Director  | director@abc.com  | password123 |
-| Accounts  | accounts@abc.com  | password123 |
+This creates five demo users:
+| Role      | Email              | Password    | Department  |
+|-----------|-------------------|-------------|-------------|
+| Employee  | employee@abc.com  | password123 | Engineering |
+| Employee  | employee2@abc.com | password123 | HR          |
+| Employee  | employee3@abc.com | password123 | Sales       |
+| Director  | director@abc.com  | password123 | Management  |
+| Accounts  | accounts@abc.com  | password123 | Finance     |
+
+New employees can also self-register via the Sign Up page (`/register`).
 
 ### 5. Start the Application
 
@@ -188,3 +192,5 @@ npm run dev
 7. Rejected vouchers include a mandatory rejection reason but cannot be resubmitted.
 8. The application uses client-side routing with React Router v6.
 9. Currency is displayed in Indian Rupees (INR).
+10. Self-registration creates Employee accounts only. Director and Accounts roles are provisioned via the seed script, as user/role management is outside the scope of this assignment.
+

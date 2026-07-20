@@ -23,6 +23,22 @@ const seedUsers = async () => {
         employeeId: 'EMP-001',
       },
       {
+        name: 'Sneha Gupta',
+        email: 'employee2@abc.com',
+        password: await bcrypt.hash('password123', salt),
+        role: 'employee',
+        department: 'HR',
+        employeeId: 'EMP-002',
+      },
+      {
+        name: 'Vikram Singh',
+        email: 'employee3@abc.com',
+        password: await bcrypt.hash('password123', salt),
+        role: 'employee',
+        department: 'Sales',
+        employeeId: 'EMP-003',
+      },
+      {
         name: 'Priya Mehta',
         email: 'director@abc.com',
         password: await bcrypt.hash('password123', salt),
@@ -42,9 +58,11 @@ const seedUsers = async () => {
 
     await User.bulkCreate(users);
     console.log('Seed users created successfully:');
-    console.log('  Employee:  employee@abc.com / password123');
-    console.log('  Director:  director@abc.com / password123');
-    console.log('  Accounts:  accounts@abc.com / password123');
+    console.log('  Employee 1:  employee@abc.com  / password123  (Engineering)');
+    console.log('  Employee 2:  employee2@abc.com / password123  (HR)');
+    console.log('  Employee 3:  employee3@abc.com / password123  (Sales)');
+    console.log('  Director:    director@abc.com  / password123');
+    console.log('  Accounts:    accounts@abc.com  / password123');
 
     process.exit(0);
   } catch (error) {

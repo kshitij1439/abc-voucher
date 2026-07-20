@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Receipt, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -117,27 +117,13 @@ const Login = () => {
           </form>
         </div>
 
-        {/* Demo credentials
-        <div className="mt-5 bg-white border border-stone-200 rounded-lg p-4">
-          <p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium mb-2.5">Demo Accounts</p>
-          <div className="space-y-1.5">
-            {[
-              { role: 'Employee', email: 'employee@abc.com' },
-              { role: 'Director', email: 'director@abc.com' },
-              { role: 'Accounts', email: 'accounts@abc.com' },
-            ].map((demo) => (
-              <button
-                key={demo.email}
-                onClick={() => { setEmail(demo.email); setPassword('password123'); }}
-                className="flex items-center justify-between w-full px-2.5 py-1.5 rounded text-xs hover:bg-stone-50 transition-colors cursor-pointer"
-              >
-                <span className="text-stone-600">{demo.role}</span>
-                <span className="text-stone-400 font-mono text-[11px]">{demo.email}</span>
-              </button>
-            ))}
-          </div>
-          <p className="text-[10px] text-stone-300 mt-2">Password: password123</p>
-        </div>  */}
+        {/* Sign up link */}
+        <p className="text-center text-xs text-stone-400 mt-5">
+          Don't have an account?{' '}
+          <Link to="/register" className="text-stone-700 font-medium hover:underline">
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
