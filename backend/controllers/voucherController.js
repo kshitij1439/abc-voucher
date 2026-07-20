@@ -365,14 +365,17 @@ const submitVoucher = async (req, res) => {
  * @access  Director
  */
 const approveVoucher = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
-    const voucher = await Voucher.findByPk(req.params.id);
+    const voucher = await Voucher.findByPk(req.params.id, { transaction });
 
     if (!voucher) {
+      await transaction.rollback();
       return res.status(404).json({ success: false, message: 'Voucher not found.' });
     }
 
     if (voucher.status !== 'submitted') {
+      await transaction.rollback();
       return res.status(400).json({
         success: false,
         message: 'Only submitted vouchers can be approved.',
@@ -382,6 +385,7 @@ const approveVoucher = async (req, res) => {
     const { directorSignature } = req.body;
 
     if (!directorSignature) {
+      await transaction.rollback();
       return res.status(400).json({
         success: false,
         message: 'Director signature is required for approval.',
@@ -393,7 +397,9 @@ const approveVoucher = async (req, res) => {
       directorSignature,
       approvalDate: new Date(),
       approvedBy: req.user.id,
-    });
+    }, { transaction });
+
+    await transaction.commit();
 
     const updatedVoucher = await Voucher.findByPk(voucher.id, {
       include: [
@@ -408,6 +414,7 @@ const approveVoucher = async (req, res) => {
       data: updatedVoucher,
     });
   } catch (error) {
+    if (transaction) await transaction.rollback();
     console.error('Approve voucher error:', error);
     res.status(500).json({ success: false, message: 'Server error approving voucher.' });
   }
@@ -419,14 +426,17 @@ const approveVoucher = async (req, res) => {
  * @access  Director
  */
 const rejectVoucher = async (req, res) => {
+  const transaction = await sequelize.transaction();
   try {
-    const voucher = await Voucher.findByPk(req.params.id);
+    const voucher = await Voucher.findByPk(req.params.id, { transaction });
 
     if (!voucher) {
+      await transaction.rollback();
       return res.status(404).json({ success: false, message: 'Voucher not found.' });
     }
 
     if (voucher.status !== 'submitted') {
+      await transaction.rollback();
       return res.status(400).json({
         success: false,
         message: 'Only submitted vouchers can be rejected.',
@@ -436,6 +446,7 @@ const rejectVoucher = async (req, res) => {
     const { rejectionReason } = req.body;
 
     if (!rejectionReason || rejectionReason.trim() === '') {
+      await transaction.rollback();
       return res.status(400).json({
         success: false,
         message: 'Rejection reason is required.',
@@ -446,7 +457,9 @@ const rejectVoucher = async (req, res) => {
       status: 'rejected',
       rejectionReason,
       approvedBy: req.user.id,
-    });
+    }, { transaction });
+
+    await transaction.commit();
 
     const updatedVoucher = await Voucher.findByPk(voucher.id, {
       include: [
@@ -461,6 +474,7 @@ const rejectVoucher = async (req, res) => {
       data: updatedVoucher,
     });
   } catch (error) {
+    if (transaction) await transaction.rollback();
     console.error('Reject voucher error:', error);
     res.status(500).json({ success: false, message: 'Server error rejecting voucher.' });
   }
@@ -480,51 +494,43 @@ const getDashboardStats = async (req, res) => {
       where.createdBy = req.user.id;
     }
 
-    const totalVouchers = await Voucher.count({ where });
-    const draftCount = await Voucher.count({ where: { ...where, status: 'draft' } });
-    const submittedCount = await Voucher.count({ where: { ...where, status: 'submitted' } });
-    const approvedCount = await Voucher.count({ where: { ...where, status: 'approved' } });
-    const rejectedCount = await Voucher.count({ where: { ...where, status: 'rejected' } });
-
-    const totalAmount = await Voucher.sum('amount', { where }) || 0;
-    const approvedAmount = await Voucher.sum('amount', {
-      where: { ...where, status: 'approved' },
-    }) || 0;
-
-    // Today's stats (for director)
+    // Today's date boundary (for director stats)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const approvedToday = await Voucher.count({
-      where: {
-        status: 'approved',
-        approvalDate: { [Op.gte]: today, [Op.lt]: tomorrow },
-      },
-    });
-
-    const rejectedToday = await Voucher.count({
-      where: {
-        status: 'rejected',
-        updatedAt: { [Op.gte]: today, [Op.lt]: tomorrow },
-      },
-    });
-
-    const pendingAmount = await Voucher.sum('amount', {
-      where: { status: 'submitted' },
-    }) || 0;
-
-    // Recent vouchers
-    const recentWhere = { ...where };
-    const recentVouchers = await Voucher.findAll({
-      where: recentWhere,
-      include: [
-        { model: User, as: 'creator', attributes: ['id', 'name', 'email'] },
-      ],
-      order: [['updatedAt', 'DESC']],
-      limit: 5,
-    });
+    // Execute statistical aggregations concurrently via Promise.all
+    const [
+      totalVouchers,
+      draftCount,
+      submittedCount,
+      approvedCount,
+      rejectedCount,
+      totalAmount,
+      approvedAmount,
+      approvedToday,
+      rejectedToday,
+      pendingAmount,
+      recentVouchers,
+    ] = await Promise.all([
+      Voucher.count({ where }),
+      Voucher.count({ where: { ...where, status: 'draft' } }),
+      Voucher.count({ where: { ...where, status: 'submitted' } }),
+      Voucher.count({ where: { ...where, status: 'approved' } }),
+      Voucher.count({ where: { ...where, status: 'rejected' } }),
+      Voucher.sum('amount', { where }).then((res) => res || 0),
+      Voucher.sum('amount', { where: { ...where, status: 'approved' } }).then((res) => res || 0),
+      Voucher.count({ where: { status: 'approved', approvalDate: { [Op.gte]: today, [Op.lt]: tomorrow } } }),
+      Voucher.count({ where: { status: 'rejected', updatedAt: { [Op.gte]: today, [Op.lt]: tomorrow } } }),
+      Voucher.sum('amount', { where: { status: 'submitted' } }).then((res) => res || 0),
+      Voucher.findAll({
+        where,
+        include: [{ model: User, as: 'creator', attributes: ['id', 'name', 'email'] }],
+        order: [['updatedAt', 'DESC']],
+        limit: 5,
+      }),
+    ]);
 
     res.json({
       success: true,

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Upload, X, PenTool, Eye, RotateCcw, Check } from 'lucide-react';
 import api from '../api/axios';
+import ImageLightboxModal from './ImageLightboxModal';
 import toast from 'react-hot-toast';
 
 const SignatureUpload = ({ currentSignature, onUpload, disabled = false, label = 'Signature' }) => {
@@ -28,6 +29,18 @@ const SignatureUpload = ({ currentSignature, onUpload, disabled = false, label =
       ctx.lineWidth = 2.5;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
+
+      // Prevent mobile page scroll when drawing on canvas
+      const preventTouchScroll = (e) => {
+        if (e.target === canvas) {
+          e.preventDefault();
+        }
+      };
+
+      canvas.addEventListener('touchmove', preventTouchScroll, { passive: false });
+      return () => {
+        canvas.removeEventListener('touchmove', preventTouchScroll);
+      };
     }
   }, [activeTab]);
 
@@ -278,48 +291,13 @@ const SignatureUpload = ({ currentSignature, onUpload, disabled = false, label =
         disabled={disabled || uploading}
       />
 
-      {/* Signature Image Lightbox Modal */}
-      {showModal && preview && (
-        <div
-          onClick={() => setShowModal(false)}
-          className="fixed inset-0 bg-stone-950/70 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white border border-stone-200 rounded-lg p-6 max-w-lg w-full shadow-xl relative"
-          >
-            <div className="flex items-center justify-between mb-4 border-b border-stone-100 pb-3">
-              <h3 className="text-sm font-semibold text-stone-800" style={{ fontFamily: 'var(--font-heading)' }}>
-                {label} Image View
-              </h3>
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                className="p-1 rounded text-stone-400 hover:text-stone-600 hover:bg-stone-100 cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <div className="flex items-center justify-center bg-stone-50 border border-stone-200 rounded-lg p-6 min-h-[200px]">
-              <img
-                src={preview}
-                alt={label}
-                className="max-h-64 object-contain"
-              />
-            </div>
-            <div className="mt-4 flex justify-end">
-              <a
-                href={preview}
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs text-teal-600 hover:text-teal-700 font-medium underline"
-              >
-                Open Original Image in New Tab ↗
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Interactive Zoomable Signature Lightbox Modal */}
+      <ImageLightboxModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        imageUrl={preview}
+        title={`${label} View`}
+      />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { ArrowLeft, Edit, Trash2, Send } from 'lucide-react';
 import { format } from 'date-fns';
 import api from '../../api/axios';
 import StatusBadge from '../../components/StatusBadge';
+import ImageLightboxModal from '../../components/ImageLightboxModal';
 import toast from 'react-hot-toast';
 
 const EmployeeVoucherDetail = () => {
@@ -171,32 +172,12 @@ const EmployeeVoucherDetail = () => {
       </div>
 
       {/* Signature View Lightbox Modal */}
-      {viewSignature && (
-        <div
-          onClick={() => setViewSignature(null)}
-          className="fixed inset-0 bg-stone-950/75 backdrop-blur-xs flex items-center justify-center p-4 z-50"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white border border-stone-200 rounded-lg p-6 max-w-lg w-full shadow-xl"
-          >
-            <div className="flex items-center justify-between mb-4 border-b border-stone-100 pb-3">
-              <h3 className="text-sm font-semibold text-stone-800" style={{ fontFamily: 'var(--font-heading)' }}>
-                {viewSignature.title}
-              </h3>
-              <button
-                onClick={() => setViewSignature(null)}
-                className="text-stone-400 hover:text-stone-600 text-xs px-2 py-1 rounded bg-stone-100 cursor-pointer"
-              >
-                Close ✕
-              </button>
-            </div>
-            <div className="flex items-center justify-center bg-stone-50 border border-stone-200 rounded-lg p-6 min-h-[180px]">
-              <img src={viewSignature.url} alt={viewSignature.title} className="max-h-64 object-contain" />
-            </div>
-          </div>
-        </div>
-      )}
+      <ImageLightboxModal
+        isOpen={Boolean(viewSignature)}
+        onClose={() => setViewSignature(null)}
+        imageUrl={viewSignature?.url}
+        title={viewSignature?.title || 'Signature View'}
+      />
     </div>
   );
 };

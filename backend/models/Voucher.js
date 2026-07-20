@@ -117,6 +117,14 @@ const Voucher = sequelize.define('Voucher', {
 }, {
   tableName: 'vouchers',
   timestamps: true,
+  indexes: [
+    { fields: ['created_by'] },
+    { fields: ['status'] },
+    { fields: ['department'] },
+    { fields: ['expense_date'] },
+    { fields: ['status', 'created_by'] },
+    { fields: ['created_at'] },
+  ],
 });
 
 // Associations
