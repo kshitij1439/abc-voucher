@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getDashboardForRole } from '../utils/roleUtils';
 import { Receipt, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -9,8 +10,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(getDashboardForRole(user.role), { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,16 +30,9 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const user = await login(email, password);
-
-      const dashboardMap = {
-        employee: '/employee/dashboard',
-        director: '/director/dashboard',
-        accounts: '/accounts/dashboard',
-      };
-
-      toast.success(`Welcome back, ${user.name}`);
-      navigate(dashboardMap[user.role] || '/');
+      const loggedUser = await login(email, password);
+      toast.success(`Welcome back, ${loggedUser.name}`);
+      navigate(getDashboardForRole(loggedUser.role));
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login failed.');
     } finally {

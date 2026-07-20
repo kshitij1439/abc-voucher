@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getDashboardForRole } from '../utils/roleUtils';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
@@ -17,13 +18,8 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    // Redirect to their own dashboard
-    const dashboardMap = {
-      employee: '/employee/dashboard',
-      director: '/director/dashboard',
-      accounts: '/accounts/dashboard',
-    };
-    return <Navigate to={dashboardMap[user.role] || '/login'} replace />;
+    // Redirect to their own role dashboard
+    return <Navigate to={getDashboardForRole(user.role)} replace />;
   }
 
   return children;

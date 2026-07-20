@@ -10,7 +10,7 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Voucher Creation | Digital Signature Drawing |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/d9eb00ed-a5d7-44c0-a239-b114a877df73" width="100%" /> | <img src="https://github.com/user-attachments/assets/3b278afb-f967-445c-be6f-a0d5d1a460f9" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/d9eb00ed-a5d7-44c0-a239-b114a877df73" width="100%" /> | <img src="https://github.com/user-attachments/assets/d46faa88-bc60-4539-bc67-e892091a0da6" width="100%" /> |
 
 <details>
 <summary><b>🔍 Click to view all additional feature screenshots (7)</b></summary>
@@ -19,15 +19,15 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Director Approval Queue | Approval Modal & Signature |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/20955d10-04d3-487b-af90-818a6a07949b" width="100%" /> | <img src="https://github.com/user-attachments/assets/26ccf1ea-2f53-4571-a420-688f997acee4" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/20955d10-04d3-487b-af90-818a6a07949b" width="100%" /> | <img src="https://github.com/user-attachments/assets/4240a07f-da35-47f2-9543-12c821149938" width="100%" /> |
 
 | Accounts Organization Overview | Advanced Filtering & Search |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/4fb5d27b-c79e-44eb-9b8a-5bd1e054761d" width="100%" /> | <img src="https://github.com/user-attachments/assets/499b7d1c-0e05-46ea-b985-9e0f1a548999" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/4fb5d27b-c79e-44eb-9b8a-5bd1e054761d" width="100%" /> | <img src="https://github.com/user-attachments/assets/301c26be-80ea-480a-a979-53c2352960db" width="100%" /> |
 
 | Voucher Detail View |
 | :---: | 
-| <img src="https://github.com/user-attachments/assets/d46faa88-bc60-4539-bc67-e892091a0da6" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/1a8305ff-2401-4a29-8cfb-2968a77d2a0c" width="100%" /> |
 
 | Employee Sign-Up Screen |
 | :---: |

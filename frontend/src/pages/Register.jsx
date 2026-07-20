@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getDashboardForRole } from '../utils/roleUtils';
 import { Receipt, Eye, EyeOff } from 'lucide-react';
 import { DEPARTMENTS } from '../components/VoucherFilters';
 import toast from 'react-hot-toast';
@@ -15,8 +16,14 @@ const Register = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const { user, register } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate(getDashboardForRole(user.role), { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleChange = (field, value) => {
     setForm({ ...form, [field]: value });
