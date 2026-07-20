@@ -27,7 +27,8 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Advanced Filtering & Search | Accounts Voucher Detail & Print Action |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/301c26be-80ea-480a-a979-53c2352960db" width="100%" /> | <img src="https://github.com/user-attachments/assets/1a8305ff-2401-4a29-8cfb-2968a77d2a0c" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/301c26be-80ea-480a-a979-53c2352960db" width="100%" /> | <img width="957" height="510" alt="Screenshot 2026-07-21 010412" src="https://github.com/user-attachments/assets/df90edfb-c7ea-48d3-ad9d-936fb19d5f50" />
+ |
 
 | Employee Sign-Up Screen |
 | :---: |
