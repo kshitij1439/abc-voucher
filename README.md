@@ -10,7 +10,7 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Voucher Creation | Digital Signature Drawing |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/4fb5d27b-c79e-44eb-9b8a-5bd1e054761d" width="100%" /> | <img src="https://github.com/user-attachments/assets/3b278afb-f967-445c-be6f-a0d5d1a460f9" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/d9eb00ed-a5d7-44c0-a239-b114a877df73" width="100%" /> | <img src="https://github.com/user-attachments/assets/3b278afb-f967-445c-be6f-a0d5d1a460f9" width="100%" /> |
 
 <details>
 <summary><b>🔍 Click to view all additional feature screenshots (7)</b></summary>
@@ -23,15 +23,15 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Accounts Organization Overview | Advanced Filtering & Search |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/cb2c2060-b5de-4cda-aa13-f61ac2a838d3" width="100%" /> | <img src="https://github.com/user-attachments/assets/499b7d1c-0e05-46ea-b985-9e0f1a548999" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/4fb5d27b-c79e-44eb-9b8a-5bd1e054761d" width="100%" /> | <img src="https://github.com/user-attachments/assets/499b7d1c-0e05-46ea-b985-9e0f1a548999" width="100%" /> |
 
-| Voucher Detail View | Print View |
-| :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/d46faa88-bc60-4539-bc67-e892091a0da6" width="100%" /> | <img src="https://github.com/user-attachments/assets/95bad59c-bd71-409a-9c54-bec183f00cd4" width="100%" /> |
+| Voucher Detail View |
+| :---: | 
+| <img src="https://github.com/user-attachments/assets/d46faa88-bc60-4539-bc67-e892091a0da6" width="100%" /> |
 
 | Employee Sign-Up Screen |
 | :---: |
-| <img src="https://github.com/user-attachments/assets/d9eb00ed-a5d7-44c0-a239-b114a877df73" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/457bf588-b471-4d1a-aa2b-f5a9afacc861" width="100%" /> |
 
 </details>
 
