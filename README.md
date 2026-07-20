@@ -118,7 +118,7 @@ Draft → Submitted → Approved (visible to Accounts for reimbursement)
 ### 1. Clone and Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kshitij1439/abc-voucher
 cd vabc
 
 # Install backend dependencies
