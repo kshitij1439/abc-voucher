@@ -31,7 +31,8 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 | Employee Dashboard Overview |
 | :---: |
-| <img src="https://github.com/user-attachments/assets/1654b00a-403c-4bf3-a265-2f071f8c932e" width="100%" /> |
+| <img width="959" height="539" alt="Screenshot 2026-07-20 220333" src="https://github.com/user-attachments/assets/71478b06-0986-4bf7-8068-4e2ccebe19f4" />
+ |
 
 </details>
 
