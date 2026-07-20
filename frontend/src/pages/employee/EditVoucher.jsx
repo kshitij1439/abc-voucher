@@ -94,7 +94,7 @@ const EditVoucher = () => {
       </div>
       <div className="max-w-2xl">
         <div className="bg-white border border-stone-200 rounded-lg p-6 space-y-5">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-[11px] uppercase tracking-wide text-stone-400 font-medium mb-1.5">Department <span className="text-red-400">*</span></label>
               <select value={form.department} onChange={(e) => handleChange('department', e.target.value)} className={`w-full px-3 py-2.5 bg-stone-50 border rounded text-sm cursor-pointer focus:outline-none focus:border-teal-500 ${errors.department ? 'border-red-300' : 'border-stone-200'}`}>
@@ -116,7 +116,7 @@ const EditVoucher = () => {
             <input type="text" value={form.expenseTitle} onChange={(e) => handleChange('expenseTitle', e.target.value)} className={`w-full px-3 py-2.5 bg-stone-50 border rounded text-sm focus:outline-none focus:border-teal-500 ${errors.expenseTitle ? 'border-red-300' : 'border-stone-200'}`} />
             {errors.expenseTitle && <p className="text-[11px] text-red-500 mt-1">{errors.expenseTitle}</p>}
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-[11px] uppercase tracking-wide text-stone-400 font-medium mb-1.5">Expense Date <span className="text-red-400">*</span></label>
               <input type="date" value={form.expenseDate} onChange={(e) => handleChange('expenseDate', e.target.value)} className={`w-full px-3 py-2.5 bg-stone-50 border rounded text-sm focus:outline-none focus:border-teal-500 ${errors.expenseDate ? 'border-red-300' : 'border-stone-200'}`} />
@@ -136,9 +136,9 @@ const EditVoucher = () => {
             <SignatureUpload currentSignature={signature} onUpload={setSignature} label="Employee Signature" />
             {errors.signature && <p className="text-[11px] text-red-500 mt-1">{errors.signature}</p>}
           </div>
-          <div className="flex items-center gap-3 pt-5 border-t border-stone-100">
-            <button onClick={saveChanges} disabled={saving} className="flex items-center gap-2 px-4 py-2.5 bg-white border border-stone-300 text-sm font-medium text-stone-700 rounded hover:bg-stone-50 disabled:opacity-50 cursor-pointer"><Save className="w-4 h-4" />Save Draft</button>
-            <button onClick={saveAndSubmit} disabled={saving} className="flex items-center gap-2 px-4 py-2.5 bg-stone-900 text-sm font-medium text-white rounded hover:bg-stone-800 disabled:opacity-50 cursor-pointer"><Send className="w-4 h-4" />Submit</button>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-5 border-t border-stone-100">
+            <button onClick={saveChanges} disabled={saving} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-stone-300 text-sm font-medium text-stone-700 rounded hover:bg-stone-50 disabled:opacity-50 cursor-pointer"><Save className="w-4 h-4" />Save Draft</button>
+            <button onClick={saveAndSubmit} disabled={saving} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-stone-900 text-sm font-medium text-white rounded hover:bg-stone-800 disabled:opacity-50 cursor-pointer"><Send className="w-4 h-4" />Submit</button>
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ const AccountsDashboard = () => {
         <p className="text-xs text-stone-400 mt-0.5">Reimbursement processing overview</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
         <StatsCard label="Total Vouchers" value={stats?.totalVouchers || 0} icon={FileText} />
         <StatsCard label="Pending" value={stats?.submittedCount || 0} icon={Clock} />
         <StatsCard label="Approved" value={stats?.approvedCount || 0} icon={CheckSquare} />
@@ -49,16 +49,16 @@ const AccountsDashboard = () => {
         {stats?.recentVouchers?.length > 0 ? (
           <div className="divide-y divide-stone-100">
             {stats.recentVouchers.map((v) => (
-              <div key={v.id} onClick={() => navigate(`/accounts/vouchers/${v.id}`)} className="flex items-center justify-between px-5 py-3 hover:bg-stone-50/50 cursor-pointer transition-colors">
-                <div className="flex items-center gap-4">
+              <div key={v.id} onClick={() => navigate(`/accounts/vouchers/${v.id}`)} className="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-3 gap-2 sm:gap-4 hover:bg-stone-50/50 cursor-pointer transition-colors">
+                <div className="flex items-center justify-between sm:justify-start gap-4">
                   <span className="text-sm font-medium text-teal-700">{v.voucherNumber}</span>
                   <span className="text-sm text-stone-600">{v.employeeName}</span>
-                  <span className="text-sm text-stone-500 truncate max-w-[150px]">{v.expenseTitle}</span>
+                  <span className="text-sm text-stone-500 truncate max-w-[120px] sm:max-w-[150px]">{v.expenseTitle}</span>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
                   <span className="text-sm font-medium text-stone-700">{fmt(v.amount)}</span>
                   <StatusBadge status={v.status} />
-                  <span className="text-xs text-stone-400 w-20 text-right">{format(new Date(v.updatedAt), 'dd MMM')}</span>
+                  <span className="text-xs text-stone-400">{format(new Date(v.updatedAt), 'dd MMM')}</span>
                 </div>
               </div>
             ))}

@@ -41,6 +41,8 @@ const EmployeeVoucherDetail = () => {
     finally { setActionLoading(false); }
   };
 
+  const [viewSignature, setViewSignature] = useState(null);
+
   if (loading) return <div className="flex items-center justify-center py-20"><div className="text-sm text-stone-400">Loading...</div></div>;
   if (!voucher) return null;
 
@@ -48,7 +50,7 @@ const EmployeeVoucherDetail = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate(-1)} className="p-1.5 rounded hover:bg-stone-200 text-stone-500 cursor-pointer"><ArrowLeft className="w-4 h-4" /></button>
           <div>
@@ -72,7 +74,7 @@ const EmployeeVoucherDetail = () => {
         {/* Main Info */}
         <div className="lg:col-span-2 bg-white border border-stone-200 rounded-lg p-6">
           <h2 className="text-sm font-semibold text-stone-800 mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Expense Details</h2>
-          <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
             <div><p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium">Title</p><p className="text-sm text-stone-800 mt-0.5">{voucher.expenseTitle}</p></div>
             <div><p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium">Department</p><p className="text-sm text-stone-800 mt-0.5">{voucher.department}</p></div>
             <div><p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium">Category</p><p className="text-sm text-stone-800 mt-0.5">{voucher.expenseCategory || '—'}</p></div>
@@ -97,8 +99,21 @@ const EmployeeVoucherDetail = () => {
             {voucher.employeeIdNumber && <p className="text-xs text-stone-400 mt-0.5">ID: {voucher.employeeIdNumber}</p>}
             {voucher.employeeSignature && (
               <div className="mt-3 pt-3 border-t border-stone-100">
-                <p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium mb-2">Signature</p>
-                <img src={voucher.employeeSignature} alt="Employee Signature" className="max-h-16 border border-stone-200 rounded p-1" />
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium">Employee Signature</p>
+                  <button
+                    onClick={() => setViewSignature({ url: voucher.employeeSignature, title: 'Employee Signature' })}
+                    className="text-[11px] text-teal-600 hover:text-teal-700 font-medium cursor-pointer"
+                  >
+                    View
+                  </button>
+                </div>
+                <img
+                  src={voucher.employeeSignature}
+                  alt="Employee Signature"
+                  onClick={() => setViewSignature({ url: voucher.employeeSignature, title: 'Employee Signature' })}
+                  className="max-h-16 border border-stone-200 rounded p-1 cursor-pointer hover:border-teal-400 transition-colors"
+                />
               </div>
             )}
           </div>
@@ -113,8 +128,21 @@ const EmployeeVoucherDetail = () => {
                   {voucher.approvalDate && <p className="text-xs text-stone-400 mt-1">{format(new Date(voucher.approvalDate), 'dd MMM yyyy, hh:mm a')}</p>}
                   {voucher.directorSignature && (
                     <div className="mt-3 pt-3 border-t border-stone-100">
-                      <p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium mb-2">Director Signature</p>
-                      <img src={voucher.directorSignature} alt="Director Signature" className="max-h-16 border border-stone-200 rounded p-1" />
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-[10px] uppercase tracking-wide text-stone-400 font-medium">Director Signature</p>
+                        <button
+                          onClick={() => setViewSignature({ url: voucher.directorSignature, title: 'Director Signature' })}
+                          className="text-[11px] text-teal-600 hover:text-teal-700 font-medium cursor-pointer"
+                        >
+                          View
+                        </button>
+                      </div>
+                      <img
+                        src={voucher.directorSignature}
+                        alt="Director Signature"
+                        onClick={() => setViewSignature({ url: voucher.directorSignature, title: 'Director Signature' })}
+                        className="max-h-16 border border-stone-200 rounded p-1 cursor-pointer hover:border-teal-400 transition-colors"
+                      />
                     </div>
                   )}
                 </>
@@ -141,6 +169,34 @@ const EmployeeVoucherDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Signature View Lightbox Modal */}
+      {viewSignature && (
+        <div
+          onClick={() => setViewSignature(null)}
+          className="fixed inset-0 bg-stone-950/75 backdrop-blur-xs flex items-center justify-center p-4 z-50"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white border border-stone-200 rounded-lg p-6 max-w-lg w-full shadow-xl"
+          >
+            <div className="flex items-center justify-between mb-4 border-b border-stone-100 pb-3">
+              <h3 className="text-sm font-semibold text-stone-800" style={{ fontFamily: 'var(--font-heading)' }}>
+                {viewSignature.title}
+              </h3>
+              <button
+                onClick={() => setViewSignature(null)}
+                className="text-stone-400 hover:text-stone-600 text-xs px-2 py-1 rounded bg-stone-100 cursor-pointer"
+              >
+                Close ✕
+              </button>
+            </div>
+            <div className="flex items-center justify-center bg-stone-50 border border-stone-200 rounded-lg p-6 min-h-[180px]">
+              <img src={viewSignature.url} alt={viewSignature.title} className="max-h-64 object-contain" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

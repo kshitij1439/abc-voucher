@@ -19,8 +19,8 @@ const Layout = () => {
         }}
       />
       <Sidebar />
-      <main className="ml-60 min-h-screen">
-        <div className="p-6 lg:p-8 max-w-7xl">
+      <main className="md:ml-60 min-h-screen pt-14 md:pt-0">
+        <div className="p-4 sm:p-6 lg:p-8 max-w-7xl">
           <Outlet />
         </div>
       </main>

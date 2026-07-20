@@ -63,7 +63,7 @@ const EmployeeDashboard = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
         <StatsCard label="Total" value={stats?.totalVouchers || 0} icon={FileText} />
         <StatsCard label="Draft" value={stats?.draftCount || 0} icon={FilePlus} />
         <StatsCard label="Pending" value={stats?.submittedCount || 0} icon={Clock} />
@@ -92,16 +92,16 @@ const EmployeeDashboard = () => {
               <div
                 key={v.id}
                 onClick={() => navigate(`/employee/vouchers/${v.id}`)}
-                className="flex items-center justify-between px-5 py-3 hover:bg-stone-50/50 cursor-pointer transition-colors"
+                className="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-3 gap-2 sm:gap-4 hover:bg-stone-50/50 cursor-pointer transition-colors"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-start gap-4">
                   <span className="text-sm font-medium text-teal-700">{v.voucherNumber}</span>
-                  <span className="text-sm text-stone-600 truncate max-w-[200px]">{v.expenseTitle}</span>
+                  <span className="text-sm text-stone-600 truncate max-w-[180px] sm:max-w-[200px]">{v.expenseTitle}</span>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4">
                   <span className="text-sm font-medium text-stone-700">{formatCurrency(v.amount)}</span>
                   <StatusBadge status={v.status} />
-                  <span className="text-xs text-stone-400 w-20 text-right">
+                  <span className="text-xs text-stone-400">
                     {format(new Date(v.updatedAt), 'dd MMM')}
                   </span>
                 </div>
