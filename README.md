@@ -4,9 +4,9 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 
 ## 📸 Screen Showcase
 
-| Sign In & Registration | Employee Dashboard |
+| Sign In Screen | Employee Self-Registration |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/63da21eb-1fad-4b2c-8d12-7842ceb03a75" width="100%" /> | <img src="https://github.com/user-attachments/assets/1654b00a-403c-4bf3-a265-2f071f8c932e" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/63da21eb-1fad-4b2c-8d12-7842ceb03a75" width="100%" /> | <img src="https://github.com/user-attachments/assets/457bf588-b471-4d1a-aa2b-f5a9afacc861" width="100%" /> |
 
 | Voucher Creation | Digital Signature Drawing |
 | :---: | :---: |
@@ -29,9 +29,9 @@ A full-stack web application for ABC Company to digitize the expense voucher cre
 | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/301c26be-80ea-480a-a979-53c2352960db" width="100%" /> | <img src="https://github.com/user-attachments/assets/df90edfb-c7ea-48d3-ad9d-936fb19d5f50" width="100%" /> |
 
-| Employee Sign-Up Screen |
+| Employee Dashboard Overview |
 | :---: |
-| <img src="https://github.com/user-attachments/assets/457bf588-b471-4d1a-aa2b-f5a9afacc861" width="100%" /> |
+| <img src="https://github.com/user-attachments/assets/1654b00a-403c-4bf3-a265-2f071f8c932e" width="100%" /> |
 
 </details>
 
